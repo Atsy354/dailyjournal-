@@ -24,7 +24,7 @@ include "koneksi.php";
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <style>
+    <Style>
       .container1 {
         background-image: url(https://e0.pxfuel.com/wallpapers/207/940/desktop-wallpaper-mountain-scenery-art-mountain-background-art-scenery-mountain-laptop.jpg);
         background-size: cover;
@@ -82,6 +82,12 @@ include "koneksi.php";
         }
       }
 
+      #gallery img {
+    max-height: 300px; /* Atur tinggi maksimum */
+    width: 100%; /* Pastikan gambar mengisi lebar kontainer */
+    object-fit: contain; /* Memastikan gambar tidak terpotong */
+    background-color: #f8f9fa; /* Tambahkan latar belakang untuk area kosong */
+  }
       #gallery,
       #article,
       .footer img,
@@ -94,7 +100,7 @@ include "koneksi.php";
         padding: 10px;
         scroll-behavior: smooth;
       }
-    </style>
+    </Style>
   </head>
   <body>
     <header>
@@ -217,10 +223,10 @@ include "koneksi.php";
     </section>
     <!-- Hero End -->
 
-    <!-- Article Start -->
-    <!-- article begin -->
+    
+    <!-- article start -->
 <section id="article" class="text-center p-5">
-  <div class="container">
+  <div class="container" style="padding-top: 50px">
     <h1 class="fw-bold display-4 pb-3">article</h1>
     <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
       <?php
@@ -251,112 +257,59 @@ include "koneksi.php";
     </div>
   </div>
 </section>
-<!-- article end -->
     <!-- Article End -->
 
     <!-- Gallery Start -->
-    <section id="gallery">
-      <div class="container" style="padding-top: 100px">
-        <div class="title text-center mb-5">
-          <h1 class="fw-bold">Gallery</h1>
-          <p>Ada beberapa macam pegunungan yang ada di Indonesia</p>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-4 col-md-4">
-            <div class="card">
-              <img
-                src="./img/bromo-sunrise.jpg"
-                class="card-img-top"
-                alt="..."
-              />
+    <section id="gallery" class="text-center p-5">
+  <div class="container" style="padding-top: 50px">
+    <h1 class="fw-bold display-4 pb-3">Gallery</h1>
+    <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <?php
+        $sql = "SELECT * FROM gallery ORDER BY tanggal DESC";
+        $hasil = $conn->query($sql);
+        $active = true; // Untuk menandai slide pertama sebagai aktif
+
+        while ($row = $hasil->fetch_assoc()) {
+        ?>
+          <div class="carousel-item <?= $active ? 'active' : '' ?>">
+            <div class="card h-100 text-center">
+              <!-- Tambahkan class pada gambar -->
+              <img src="img/<?= $row["gambar"] ?>" class="d-block w-100" alt="<?= $row["judul"] ?>" />
               <div class="card-body">
+                <h5 class="card-title"><?= $row["judul"] ?></h5>
                 <p class="card-text">
-                  Gunung Bromo. Terletak di Kabupaten Probolinggo Provinsi Jawa
-                  Timur.
+                  <?= $row["isi"] ?>
                 </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">
+                  <?= $row["tanggal"] ?>
+                </small>
               </div>
             </div>
           </div>
-          <div class="col-12 col-lg-4 col-md-4">
-            <div class="card">
-              <img
-                src="./img/gunung merbabu.jpg"
-                class="card-img-top"
-                alt="..."
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Gunung Merbabu. Terletak di Kabupaten Magelang, Provinsi Jawa
-                  Tengah.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-4 col-md-4">
-            <div class="card">
-              <img
-                src="./img/gunung semeru.jpeg"
-                class="card-img-top"
-                alt="..."
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Gunung Semeru. Terletak di Kabupaten Malang dan Kabupaten
-                  Lumajang, Provinsi Jawa Timur.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-4 col-md-4">
-            <div class="card">
-              <img
-                src="./img/licensed-image (1).jpg"
-                class="card-img-top"
-                alt="..."
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Gunung Sumbing. Terletak di Kabupaten Magelang, Temanggung,
-                  dan Wonosobo Provinsi Jawa Tengah.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-4 col-md-4">
-            <div class="card">
-              <img
-                src="./img/licensed-image (2).jpg"
-                class="card-img-top"
-                alt="..."
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Gunung Lawu. Terletak di Karanganyar di Jawa Tengah, Ngawi,
-                  dan Magetan di Jawa Timur.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-4 col-md-4">
-            <div class="card">
-              <img
-                src="./img/licensed-image.jpg"
-                class="card-img-top"
-                alt="..."
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Gunung Merapi. Terletak Klaten, Boyolali, Magelang, Jawa
-                  Tengah dan Sleman, DIY.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php
+          $active = false; // Setelah slide pertama, nonaktifkan `active`
+        }
+        ?>
       </div>
-    </section>
+
+      <!-- Controls for Carousel -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
 
     <!-- Gallery End -->
 
