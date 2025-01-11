@@ -34,8 +34,11 @@ include "koneksi.php";
 
       .container2 {
         background-color: pink;
-        align-items: center;
       }
+
+  
+
+      
       .img1 {
         width: 300px;
       }
@@ -424,7 +427,7 @@ include "koneksi.php";
 
     <!-- About Me Start -->
     <section id="aboutme">
-      <div class="container3" style="padding-top: 100px">
+      <div class="container" style="padding-top: 100px">
         <div class="row">
           <div class="container2 p-5 text-center">
             <img
